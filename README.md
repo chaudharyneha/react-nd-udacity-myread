@@ -6,12 +6,12 @@ The project uses Node.js and the Create-React-App starter. If you do not have No
 
 Once Node is installed, go to the directory where you want to store the app
 
-_git clone https://github.com/chaudharyneha/react-nd-udacity-myread.git
-npm install_
+**git clone https://github.com/chaudharyneha/react-nd-udacity-myread.git**
+**npm install**
 
 After all dependencies has been installed, you can launch the app with-
 
-_npm start_
+**npm start**
 
 A new browser window automatically opens up displaying the app. If it doesn't, go to http://localhost:3000/ in your browser window.
 
