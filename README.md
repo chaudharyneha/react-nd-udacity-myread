@@ -1,6 +1,21 @@
-## MY READS
+# MY READS
 MyReads project, creates a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read.
 
+## How to load the App
+The project uses Node.js and the Create-React-App starter. If you do not have Node installed, you can download it from here: [Node.js](https://nodejs.org/en/download)
+
+Once Node is installed, go to the directory where you want to store the app
+
+_git clone https://github.com/chaudharyneha/react-nd-udacity-myread.git
+npm install_
+
+After all dependencies has been installed, you can launch the app with-
+
+_npm start_
+
+A new browser window automatically opens up displaying the app. If it doesn't, go to http://localhost:3000/ in your browser window.
+
+## How to use the App
 In this application, the main page displays a list of "shelves" (i.e. categories), each of which contains a number of books. The three shelves are:
 
  --> Currently Reading
