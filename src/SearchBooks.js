@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
+import BookShelf from './BookShelf';
 
 class SearchBooks extends Component {
   static PropTypes = {
@@ -33,8 +34,8 @@ class SearchBooks extends Component {
 
     for (let item of books ) {
       if (item.id === book.id)  {
-        currentShelf = item.shelf
-        break
+        currentShelf = item.shelf;
+        break;
       }
     }
     return currentShelf;
@@ -43,7 +44,6 @@ class SearchBooks extends Component {
   render() {
 
     const { query, newBooks, searchErr } = this.state
-    console.log('newBooks....',newBooks);
     const { updateShelf } = this.props
 
       return (
@@ -63,35 +63,10 @@ class SearchBooks extends Component {
                 <div className=''>
                   <h3>Search returned { newBooks.length } books </h3>
                 </div>
-                <ol className="books-grid">
-                  {newBooks.map((book) => (
-                    <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{
-                              width: 128,
-                              height: 193,
-                              backgroundImage: `url("${book.imageLinks.thumbnail}")`
-                            }}>
-                          </div>
-                          <div className="book-shelf-changer">
-                            <select onChange={(event) => updateShelf(book, event.target.value)} defaultValue={this.calculateShelf(book)}>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors && book.authors.map(author =>
-                            <span>{author}{' '}</span>)}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
+                <BookShelf
+                  books={newBooks}
+                  updateShelf={updateShelf}
+                />
               </div>
             )}
             { searchErr  && (
