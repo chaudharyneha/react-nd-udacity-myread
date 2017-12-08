@@ -9,8 +9,8 @@ class Book extends Component {
     books: PropTypes.array.isRequired
   }
 
-  calculateShelf = (book, currentShelf) => {
-    const { books } = this.props;
+  calculateShelf = (book, books) => {
+    let currentShelf = 'none';
 
     for (let item of books ) {
       if (item.id === book.id)  {
@@ -22,9 +22,7 @@ class Book extends Component {
   }
 
   render() {
-    const { books, book, updateShelf } = this.props
-    console.log('boooldkdkdnf: ', book);
-    let currentShelf = 'none'
+    const { books, book, updateShelf } = this.props;
 
     return (
       <li key={book.id}>
@@ -32,7 +30,7 @@ class Book extends Component {
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
             <div className="book-shelf-changer">
-              <select  onChange={(event) => updateShelf(book, event.target.value)} defaultValue={this.calculateShelf(book, currentShelf)}>
+              <select  onChange={(event) => updateShelf(book, event.target.value)} defaultValue={this.calculateShelf(book, books)}>
                 <option value="none" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
