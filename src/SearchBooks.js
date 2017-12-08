@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
-import BookShelf from './BookShelf';
+import Book from './Book'
 
 class SearchBooks extends Component {
   static PropTypes = {
@@ -28,23 +28,10 @@ class SearchBooks extends Component {
   } else this.setState({newBooks: [], searchErr: false })
   }
 
-  calculateShelf = book => {
-    const { books } = this.props;
-    let currentShelf = 'none';
-
-    for (let item of books ) {
-      if (item.id === book.id)  {
-        currentShelf = item.shelf;
-        break;
-      }
-    }
-    return currentShelf;
-  }
-
   render() {
 
     const { query, newBooks, searchErr } = this.state
-    const { updateShelf } = this.props
+    const { updateShelf, books } = this.props
 
       return (
         <div className="search-books">
@@ -63,10 +50,16 @@ class SearchBooks extends Component {
                 <div className=''>
                   <h3>Search returned { newBooks.length } books </h3>
                 </div>
-                <BookShelf
-                  books={newBooks}
-                  updateShelf={updateShelf}
-                />
+                <ol className="books-grid">
+                  {newBooks.map((book) => (
+                    <Book
+                      book={ book }
+                      books={ books }
+                      key={ book.id }
+                      updateShelf={updateShelf}
+                    />
+                  ))}
+                </ol>
               </div>
             )}
             { searchErr  && (
