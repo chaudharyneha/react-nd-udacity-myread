@@ -23,12 +23,13 @@ class Book extends Component {
 
   render() {
     const { books, book, updateShelf } = this.props;
+    const thumbnail = book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : null;
 
     return (
       <li key={book.id}>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
+            <div className="book-cover" style={{ backgroundImage: `url("${thumbnail}")` }}></div>
             <div className="book-shelf-changer">
               <select  onChange={(event) => updateShelf(book, event.target.value)} defaultValue={this.calculateShelf(book, books)}>
                 <option value="none" disabled>Move to...</option>
@@ -40,7 +41,7 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{book.title}</div>
-          <div className="book-authors">{book.authors && book.authors.forEach(author => <span> {author}{' '} </span>)}</div>
+          <div className="book-authors">{book.authors && book.authors.map(author => <span> {author}{' '} </span>)}</div>
         </div>
       </li>
     )
