@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
-import Book from './Book'
+import Book from './Book';
+import debounce from 'lodash.debounce'
 
 class SearchBooks extends Component {
   static PropTypes = {
@@ -17,16 +18,19 @@ class SearchBooks extends Component {
 
   getBooks = (event) => {
 
-    const query = event.target.value.trim()
+    this.searchBooks(event.target.value.trim());
+  }
+
+  searchBooks = debounce((query) => {
     this.setState({ query: query })
 
     if (query) {
       BooksAPI.search(query, 20).then((books) => {
         books.length > 0 ?  this.setState({newBooks: books, searchErr: false }) : this.setState({ newBooks: [], searchErr: true })
       })
-
   } else this.setState({newBooks: [], searchErr: false })
-  }
+}, 400)
+
 
   render() {
 
